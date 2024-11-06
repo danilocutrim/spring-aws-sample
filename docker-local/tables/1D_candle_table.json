@@ -1,0 +1,29 @@
+{
+
+    "AttributeDefinitions": [
+      {
+        "AttributeName": "token_address",
+        "AttributeType": "S"
+      },
+      {
+        "AttributeName": "time",
+        "AttributeType": "N"
+      }
+    ],
+  "ProvisionedThroughput": {
+    "WriteCapacityUnits": 5,
+    "ReadCapacityUnits": 5
+  },
+    "TableName": "1D_candles",
+    "KeySchema": [
+      {
+        "AttributeName": "token_address",
+        "KeyType": "HASH"
+      },
+      {
+        "AttributeName": "time",
+        "KeyType": "RANGE"
+      }
+    ]
+  }
+
