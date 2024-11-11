@@ -1,4 +1,4 @@
-package br.com.dc.sample
+package br.com.ghclone
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

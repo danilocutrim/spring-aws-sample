@@ -1,0 +1,27 @@
+{
+  "AttributeDefinitions": [
+    {
+      "AttributeName": "repositoryName",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "sK",
+      "AttributeType": "S"
+    }
+  ],
+  "ProvisionedThroughput": {
+    "WriteCapacityUnits": 5,
+    "ReadCapacityUnits": 5
+  },
+  "TableName": "repository-table",
+  "KeySchema": [
+    {
+      "KeyType": "HASH",
+      "AttributeName": "repositoryName"
+    },
+    {
+      "KeyType": "RANGE",
+      "AttributeName": "sK"
+    }
+  ]
+}
