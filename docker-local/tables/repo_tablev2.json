@@ -1,0 +1,53 @@
+{
+  "TableName": "repository-table",
+  "AttributeDefinitions": [
+    {
+      "AttributeName": "repositoryName",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "path",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "fileName",
+      "AttributeType": "S"
+    }
+  ],
+  "KeySchema": [
+    {
+      "AttributeName": "repositoryName",
+      "KeyType": "HASH"
+    },
+    {
+      "AttributeName": "path",
+      "KeyType": "RANGE"
+    }
+  ],
+  "GlobalSecondaryIndexes": [
+    {
+      "IndexName": "ContentIndex",
+      "KeySchema": [
+        {
+          "AttributeName": "path",
+          "KeyType": "HASH"
+        },
+        {
+          "AttributeName": "fileName",
+          "KeyType": "RANGE"
+        }
+      ],
+      "Projection": {
+        "ProjectionType": "KEYS_ONLY"
+      },
+      "ProvisionedThroughput": {
+        "ReadCapacityUnits": 5,
+        "WriteCapacityUnits": 5
+      }
+    }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+  }
+}

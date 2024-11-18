@@ -1,22 +1,40 @@
 package br.com.ghclone.model.request
 
-import br.com.ghclone.storage.StorageObject
-import br.com.ghclone.storage.storageObject
+import br.com.ghclone.enums.ContentType
+import br.com.ghclone.model.entity.RepoEntity
+import java.nio.file.Path
 
 data class ContentRequest(
-    val content: String,
-    val encoding: String,
-    val project: String,
-    val uri: String,
-    val fileName: String
+    val repo: String,
+    val contentPath: String,
+    val encoding: String? = null,
+    val content: String?=null,
+    val fileName: String?=null,
+    val description: String? = null
 ) {
-    fun toStorageObject(): StorageObject {
-        return storageObject {
-            projectName = project
-            apiUri = uri
-            fileName = this@ContentRequest.fileName
-            content = this@ContentRequest.content
-            encodingType = encoding
-        }
+    fun toRepo():RepoEntity{
+
+        return RepoEntity(
+            repositoryName = repo,
+            description = description ?: "",
+            content = contentPath,
+            contentType = contentType(),
+            fileName = fileName ?: ""
+        )
     }
+    private fun contentType():ContentType{
+        if(fileName.isNullOrEmpty()){
+            return ContentType.REPO
+        }
+        return ContentType.FILE
+    }
+//    fun toStorageObject(): StorageObject {
+//        return storageObject {
+//            projectName = project
+//            apiUri = uri
+//            fileName = this@ContentRequest.fileName
+//            content = this@ContentRequest.content
+//            encodingType = encoding
+//        }
+//    }
 }

@@ -1,22 +1,21 @@
 package br.com.ghclone.model.request
 
-import br.com.ghclone.model.Repo
+import br.com.ghclone.model.entity.RepoEntity
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import jakarta.validation.constraints.NotBlank
 
+@JsonIgnoreProperties(ignoreUnknown = true)
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 data class NewRepoRequest(
+//    @get:Size(min = 1, max = 2)
     val name: String,
-    val description: String,
-    val homepage: String,
-    val isPrivate: Boolean,
-    val hasIssues: Boolean,
-    val hasProjects: Boolean,
-    val hasWiki: Boolean
-){
-    fun toRepo(): Repo {
-        return Repo(
-            id = "",
-            name = name,
-            description = description,
-            contents = emptyList()
+    @get:NotBlank
+    val description: String? = null
+) {
+    fun toRepo(): RepoEntity {
+        return RepoEntity(
+            repositoryName = name,
+            description = description?:""
         )
     }
 }

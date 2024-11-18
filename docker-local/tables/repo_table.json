@@ -1,27 +1,31 @@
 {
+  "TableName": "repository-table",
   "AttributeDefinitions": [
     {
       "AttributeName": "repositoryName",
       "AttributeType": "S"
     },
     {
-      "AttributeName": "sK",
+      "AttributeName": "contentSk",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "description",
       "AttributeType": "S"
     }
   ],
-  "ProvisionedThroughput": {
-    "WriteCapacityUnits": 5,
-    "ReadCapacityUnits": 5
-  },
-  "TableName": "repository-table",
   "KeySchema": [
     {
-      "KeyType": "HASH",
-      "AttributeName": "repositoryName"
+      "AttributeName": "repositoryName",
+      "KeyType": "HASH"
     },
     {
-      "KeyType": "RANGE",
-      "AttributeName": "sK"
+      "AttributeName": "contentSk",
+      "KeyType": "RANGE"
     }
-  ]
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+  }
 }

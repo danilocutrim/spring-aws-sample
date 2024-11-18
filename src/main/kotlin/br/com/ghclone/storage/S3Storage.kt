@@ -13,7 +13,7 @@ abstract class S3Storage(private val bucketName: String, private val s3Client: S
     }
 
 
-    fun createPutObject(rootDir: String,path:String, fileName:String, content: ByteStream) {
+    fun createPutObject(rootDir: String, path: String, fileName: String, content: ByteStream) {
         PutObjectRequest {
             bucket = bucketName
             key = fileName

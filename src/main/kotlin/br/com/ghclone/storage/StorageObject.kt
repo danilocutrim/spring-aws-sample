@@ -25,9 +25,9 @@ data class StorageObjectBuilder(
     fun build(): StorageObject {
         return StorageObject(
             projectName = ProjectName(projectName),
-            apiUri = apiUri ,
-            fileName = fileName ,
-            content = content ,
+            apiUri = apiUri,
+            fileName = fileName,
+            content = content,
             encodingType = encodingType
         )
     }

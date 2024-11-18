@@ -1,12 +1,9 @@
 package br.com.ghclone.controller
 
 import br.com.ghclone.model.entity.RepoEntity
-import br.com.ghclone.model.entity.User
 import br.com.ghclone.model.request.ContentRequest
 import br.com.ghclone.model.request.NewRepoRequest
-import br.com.ghclone.service.RepositoryService
-import br.com.ghclone.service.UserService
-import br.com.spring.dynamodb.model.request.UserUpdateRequest
+import br.com.ghclone.service.RepoService
 import io.github.oshai.kotlinlogging.KotlinLogging
 import jakarta.validation.Valid
 import jakarta.validation.constraints.NotBlank
@@ -15,31 +12,39 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/repo")
 class RepoController(
-    private val repositoryService: RepositoryService
+    private val repoService: RepoService
 ) {
     private val logger = KotlinLogging.logger {}
 
     @PostMapping
     suspend fun createRepo(
-        @RequestBody projectRequest: NewRepoRequest,
+        @Valid @RequestBody projectRequest: NewRepoRequest,
     ) {
         logger.info { "saveUser: saving User " }
-        repositoryService.createRepository(projectRequest.toRepo())
+        repoService.createRepository(projectRequest.toRepo())
+    }
+
+    @PostMapping("/update")
+    suspend fun createOrUpdateContent(
+        @Valid @RequestBody contentRequest: ContentRequest,
+    ) {
+        logger.info { "saveUser: saving User " }
+        repoService.addOrUpdateContent(contentRequest)
     }
 
     @GetMapping
     suspend fun getUser(
-        @RequestParam("id") @NotBlank id: String,
-        @RequestParam("document") document: String
+        @RequestParam("repoName") @NotBlank repoName: String,
+        @RequestParam("path", required = false) path: String? = null
     ): RepoEntity {
-        logger.info { "getUser: finding user by document: $document Id: $id" }
-        return repositoryService.getRepository(
-            document = document,
-            id = id,
+        logger.info { "getUser: finding user by document: $path Id: $repoName" }
+        return repoService.getRepository(
+            document = repoName,
+            id = path,
         ).also {
             logger.info {
                 "getUser: find successfully to " +
-                        "document: $document Id: $id"
+                        "document: $path Id: $repoName"
             }
         }
     }

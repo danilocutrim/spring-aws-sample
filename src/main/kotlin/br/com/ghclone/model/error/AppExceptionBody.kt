@@ -2,10 +2,9 @@ package br.com.ghclone.model.error
 
 import java.time.LocalDateTime
 
-class AppExceptionBody(
+data class AppExceptionBody<T>(
     val timeStamp: LocalDateTime = LocalDateTime.now(),
     val status: Int,
-    val error: String,
-    val message: String,
-    val path: String
+    val error: T,
+    val message: String
 )
