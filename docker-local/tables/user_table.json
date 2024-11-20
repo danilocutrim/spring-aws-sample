@@ -1,11 +1,11 @@
 {
   "AttributeDefinitions": [
     {
-      "AttributeName": "userId",
+      "AttributeName": "pk",
       "AttributeType": "S"
     },
     {
-      "AttributeName": "document",
+      "AttributeName": "sk",
       "AttributeType": "S"
     }
   ],
@@ -13,15 +13,15 @@
     "WriteCapacityUnits": 5,
     "ReadCapacityUnits": 5
   },
-  "TableName": "user-table",
+  "TableName": "permission-table",
   "KeySchema": [
     {
       "KeyType": "HASH",
-      "AttributeName": "userId"
+      "AttributeName": "pk"
     },
     {
       "KeyType": "RANGE",
-      "AttributeName": "document"
+      "AttributeName": "sk"
     }
   ]
 }

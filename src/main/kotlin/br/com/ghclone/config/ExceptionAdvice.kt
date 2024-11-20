@@ -1,9 +1,11 @@
 package br.com.ghclone.config
 
+import br.com.ghclone.exception.BadRequestException
 import br.com.ghclone.exception.InvalidFieldsException
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatusCode
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.bind.support.WebExchangeBindException
 import org.springframework.web.reactive.result.method.annotation.ResponseEntityExceptionHandler
@@ -13,6 +15,11 @@ import reactor.core.publisher.Mono
 @RestControllerAdvice
 class ExceptionAdvice : ResponseEntityExceptionHandler() {
 
+
+    @ExceptionHandler(BadRequestException::class)
+    fun handleBadRequestException(ex: BadRequestException, exchange: ServerWebExchange): Mono<ResponseEntity<Any>> {
+        return createResponseEntity(ex, HttpHeaders.EMPTY, HttpStatusCode.valueOf(400), exchange)
+    }
 
     override fun handleWebExchangeBindException(
         ex: WebExchangeBindException,

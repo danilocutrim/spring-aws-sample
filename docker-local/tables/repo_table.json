@@ -2,25 +2,21 @@
   "TableName": "repository-table",
   "AttributeDefinitions": [
     {
-      "AttributeName": "repositoryName",
+      "AttributeName": "pk",
       "AttributeType": "S"
     },
     {
-      "AttributeName": "contentSk",
-      "AttributeType": "S"
-    },
-    {
-      "AttributeName": "description",
+      "AttributeName": "sk",
       "AttributeType": "S"
     }
   ],
   "KeySchema": [
     {
-      "AttributeName": "repositoryName",
+      "AttributeName": "pk",
       "KeyType": "HASH"
     },
     {
-      "AttributeName": "contentSk",
+      "AttributeName": "sk",
       "KeyType": "RANGE"
     }
   ],

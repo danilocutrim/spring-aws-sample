@@ -1,8 +1,7 @@
 package br.com.ghclone.model.request
 
 import br.com.ghclone.enums.ContentType
-import br.com.ghclone.model.entity.RepoEntity
-import java.nio.file.Path
+import br.com.ghclone.entity.dynamodb.RepoEntity
 
 data class ContentRequest(
     val repo: String,
@@ -12,7 +11,7 @@ data class ContentRequest(
     val fileName: String?=null,
     val description: String? = null
 ) {
-    fun toRepo():RepoEntity{
+    fun toRepo(): RepoEntity {
 
         return RepoEntity(
             repositoryName = repo,

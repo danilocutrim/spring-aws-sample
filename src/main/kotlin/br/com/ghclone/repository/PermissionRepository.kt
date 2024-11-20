@@ -1,23 +1,24 @@
 package br.com.ghclone.repository
 
 
+import br.com.ghclone.constants.PERMISSION_TABLE_NAME
 import br.com.ghclone.constants.TABLE_NAME
-import br.com.ghclone.entity.dynamodb.RepoSchema
+import br.com.ghclone.entity.dynamodb.PermissionSchema
 import org.springframework.stereotype.Repository
 import software.amazon.awssdk.enhanced.dynamodb.*
 import software.amazon.awssdk.enhanced.dynamodb.model.GetItemEnhancedRequest
 import software.amazon.awssdk.enhanced.dynamodb.model.PutItemEnhancedRequest
 
 @Repository
-class RepoRepository(
+class PermissionRepository(
     private val dynamoDb: DynamoDbEnhancedAsyncClient
-) : AbstractRepository<RepoSchema>(dynamoDb) {
+) : AbstractRepository<PermissionSchema>(dynamoDb) {
 
-    override fun createTable(): DynamoDbAsyncTable<RepoSchema> {
-        return dynamoDb.table(TABLE_NAME, TableSchema.fromBean(RepoSchema::class.java))
+    override fun createTable(): DynamoDbAsyncTable<PermissionSchema> {
+        return dynamoDb.table(PERMISSION_TABLE_NAME, TableSchema.fromBean(PermissionSchema::class.java))
     }
 
-    override fun createGetRequest(entity: RepoSchema): GetItemEnhancedRequest {
+    override fun createGetRequest(entity: PermissionSchema): GetItemEnhancedRequest {
         return GetItemEnhancedRequest.builder()
             .key(
                 Key.builder()
@@ -28,12 +29,12 @@ class RepoRepository(
             .build()
     }
 
-    override fun createSaveRequest(entity: RepoSchema): PutItemEnhancedRequest<RepoSchema> {
+    override fun createSaveRequest(entity: PermissionSchema): PutItemEnhancedRequest<PermissionSchema> {
         val conditionExpression = Expression.builder()
             .expression("attribute_not_exists(pk) AND attribute_not_exists(sk)")
             .build()
 
-        return PutItemEnhancedRequest.builder(RepoSchema::class.java)
+        return PutItemEnhancedRequest.builder(PermissionSchema::class.java)
             .item(entity)
             .conditionExpression(conditionExpression)
             .build()

@@ -2,6 +2,7 @@ package br.com.ghclone.constants
 
 
 const val TABLE_NAME = "repository-table"
+const val PERMISSION_TABLE_NAME = "permission-table"
 const val USER_NOT_FOUND = "User Not Found"
 const val DYNAMODB_URL_PROPERTY = "spring.cloud.aws.dynamodb.endpoint"
 const val S3_URL_PROPERTY = "spring.cloud.aws.s3.endpoint"
