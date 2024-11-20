@@ -2,8 +2,7 @@ package br.com.ghclone.repository
 
 
 import br.com.ghclone.constants.PERMISSION_TABLE_NAME
-import br.com.ghclone.constants.TABLE_NAME
-import br.com.ghclone.entity.dynamodb.PermissionSchema
+import br.com.ghclone.schema.PermissionSchema
 import org.springframework.stereotype.Repository
 import software.amazon.awssdk.enhanced.dynamodb.*
 import software.amazon.awssdk.enhanced.dynamodb.model.GetItemEnhancedRequest

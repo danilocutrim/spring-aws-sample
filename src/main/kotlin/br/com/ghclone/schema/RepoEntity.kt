@@ -1,4 +1,4 @@
-package br.com.ghclone.entity.dynamodb
+package br.com.ghclone.schema
 
 import br.com.ghclone.enums.ContentType
 import com.fasterxml.jackson.annotation.JsonInclude

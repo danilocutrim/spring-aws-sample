@@ -1,8 +1,8 @@
-package br.com.ghclone.entity.builder
+package br.com.ghclone.builder
 
-import br.com.ghclone.entity.dynamodb.RepoSchema
-import br.com.ghclone.entity.dynamodb.RepoInfoSchema
-import br.com.ghclone.entity.dynamodb.RepoKeySchema
+import br.com.ghclone.schema.RepoSchema
+import br.com.ghclone.schema.RepoInfoSchema
+import br.com.ghclone.schema.RepoKeySchema
 import br.com.ghclone.enums.PkPrefix
 import br.com.ghclone.util.dateNow
 

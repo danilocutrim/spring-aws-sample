@@ -1,33 +1,20 @@
 package br.com.ghclone.domain
 
-import br.com.ghclone.entity.builder.repoInfoEntity
-import br.com.ghclone.entity.dynamodb.RepoSchema
+import br.com.ghclone.builder.repoInfoEntity
+import br.com.ghclone.schema.RepoSchema
 
-sealed class RepoAttribute {
-
-    data class Content(
-        val name: String,
-        val path: String,
-        val type: String,
-        val content: String,
-        val createdAt: String
-    ) : RepoAttribute()
-
-
-}
-
-data class Info(val name: String, val description: String, val type: String, val createdAt: String) : RepoAttribute() {
+data class RepoInfo(val name: String, val description: String, val type: String, val createdAt: String) {
     fun toEntity() = repoInfoEntity {
         repoName = name
         repoDescription = description
     }
     companion object {
-        fun fromEntity(entity: RepoSchema): Info {
+        fun fromEntity(entity: RepoSchema): RepoInfo {
             val name = requireNotNull(entity.repoInfo?.repositoryName) { "Repository name cannot be blank" }
             val description = requireNotNull(entity.repoInfo?.description) { "Repository description cannot be blank" }
             val createdAt =
                 requireNotNull(entity.repoInfo?.repoCreatedAt) { "Repository creation date cannot be blank" }
-            return Info(name, description, "repo", createdAt)
+            return RepoInfo(name, description, "repo", createdAt)
         }
     }
 }

@@ -2,7 +2,7 @@ package br.com.ghclone.repository
 
 
 import br.com.ghclone.constants.TABLE_NAME
-import br.com.ghclone.entity.dynamodb.RepoSchema
+import br.com.ghclone.schema.RepoSchema
 import org.springframework.stereotype.Repository
 import software.amazon.awssdk.enhanced.dynamodb.*
 import software.amazon.awssdk.enhanced.dynamodb.model.GetItemEnhancedRequest

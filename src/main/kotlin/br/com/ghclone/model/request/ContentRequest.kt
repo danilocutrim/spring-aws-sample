@@ -1,7 +1,7 @@
 package br.com.ghclone.model.request
 
 import br.com.ghclone.enums.ContentType
-import br.com.ghclone.entity.dynamodb.RepoEntity
+import br.com.ghclone.schema.RepoEntity
 
 data class ContentRequest(
     val repo: String,

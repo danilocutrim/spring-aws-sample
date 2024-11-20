@@ -1,18 +1,16 @@
 package br.com.ghclone.controller
 
-import br.com.ghclone.domain.Info
-import br.com.ghclone.entity.dynamodb.RepoSchema
+import br.com.ghclone.domain.RepoInfo
+import br.com.ghclone.schema.RepoSchema
 import br.com.ghclone.model.request.NewRepoRequest
 import br.com.ghclone.model.response.SuccessResponse
 import br.com.ghclone.service.RepoService
 import io.github.oshai.kotlinlogging.KotlinLogging
 import jakarta.validation.Valid
 import jakarta.validation.constraints.NotBlank
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
 import org.springframework.web.bind.annotation.*
-import software.amazon.awssdk.enhanced.dynamodb.model.Page
 
 @RestController
 @RequestMapping("/repo")
@@ -24,7 +22,7 @@ class RepoController(
     @PostMapping
     suspend fun createRepo(
         @Valid @RequestBody projectRequest: NewRepoRequest,
-    ): SuccessResponse<Info> {
+    ): SuccessResponse<RepoInfo> {
         logger.info { "saveUser: saving User " }
         return SuccessResponse(repoService.createRepository(projectRequest))
     }

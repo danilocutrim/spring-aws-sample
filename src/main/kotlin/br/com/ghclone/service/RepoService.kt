@@ -1,8 +1,8 @@
 package br.com.ghclone.service
 
-import br.com.ghclone.domain.Info
-import br.com.ghclone.entity.builder.repoInfoEntity
-import br.com.ghclone.entity.dynamodb.RepoSchema
+import br.com.ghclone.domain.RepoInfo
+import br.com.ghclone.builder.repoInfoEntity
+import br.com.ghclone.schema.RepoSchema
 import br.com.ghclone.enums.PkPrefix
 import br.com.ghclone.model.request.NewRepoRequest
 import br.com.ghclone.repository.RepoRepository
@@ -14,12 +14,12 @@ import software.amazon.awssdk.enhanced.dynamodb.model.Page
 @Service
 class RepoService(private val dynamoRepo: RepoRepository, val userService: UserService) {
 
-    suspend fun createRepository(repo: NewRepoRequest): Info {
-        val entity = repo.info.toEntity()
+    suspend fun createRepository(repo: NewRepoRequest): RepoInfo {
+        val entity = repo.repoInfo.toEntity()
         dynamoRepo.save(entity)
         userService.addPermission(entity.repoInfo?.repositoryName!!, repo.contributors())
 
-        return Info.fromEntity(entity)
+        return RepoInfo.fromEntity(entity)
     }
 
 //    suspend fun addOrUpdateContent(contentRequest: ContentRequest): RepoContent {

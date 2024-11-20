@@ -1,4 +1,4 @@
-package br.com.ghclone.entity.dynamodb
+package br.com.ghclone.schema
 
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.*
 
@@ -22,20 +22,6 @@ data class RepoPermissionSchema(
     var repoName: String? = null,
     var admin: String? = null,
     var user: String? = null
-)
-
-@DynamoDbBean
-data class PermissionSchema(
-    @get:DynamoDbFlatten
-    var key: PermissionKeySchema? = null,
-    @get:DynamoDbFlatten
-    @get:DynamoDbIgnoreNulls
-    @get:DynamoDbPreserveEmptyObject
-    var permission: RepoPermissionSchema? = null,
-    @get:DynamoDbFlatten
-    @get:DynamoDbIgnoreNulls
-    @get:DynamoDbPreserveEmptyObject
-    var userInfo: UserSchema? = null
 )
 
 

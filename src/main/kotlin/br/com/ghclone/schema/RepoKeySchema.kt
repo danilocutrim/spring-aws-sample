@@ -1,4 +1,4 @@
-package br.com.ghclone.entity.dynamodb
+package br.com.ghclone.schema
 
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey

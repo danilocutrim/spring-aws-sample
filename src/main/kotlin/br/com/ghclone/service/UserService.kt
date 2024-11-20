@@ -1,7 +1,7 @@
 package br.com.ghclone.service
 
 import br.com.ghclone.domain.Contributor
-import br.com.ghclone.entity.dynamodb.PermissionSchema
+import br.com.ghclone.schema.PermissionSchema
 import br.com.ghclone.repository.PermissionRepository
 import org.springframework.stereotype.Service
 
