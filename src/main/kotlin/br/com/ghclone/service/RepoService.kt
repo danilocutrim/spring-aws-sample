@@ -36,7 +36,7 @@ class RepoService(private val dynamoRepo: RepoRepository, val userService: UserS
         return dynamoRepo.findOne(repoInfoEntity { repoName = name })
     }
 
-    fun findRepos(name: String): Flow<Page<RepoSchema>> {
+    fun findRepos(name: String): Flow<MutableList<RepoSchema>> {
         return dynamoRepo.findAllByPk(PkPrefix.REPO.pk(name))
     }
 

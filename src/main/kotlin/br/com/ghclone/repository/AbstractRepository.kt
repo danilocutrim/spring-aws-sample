@@ -3,12 +3,14 @@ package br.com.ghclone.repository
 import br.com.ghclone.exception.BadRequestException
 import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.future.await
 import kotlinx.coroutines.reactive.asFlow
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbAsyncTable
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedAsyncClient
 import software.amazon.awssdk.enhanced.dynamodb.Key
 import software.amazon.awssdk.enhanced.dynamodb.model.*
+import java.util.function.Consumer
 
 abstract class AbstractRepository<T>(private val dynamoDb: DynamoDbEnhancedAsyncClient) {
     private val table: DynamoDbAsyncTable<T> by lazy { createTable() }
@@ -37,8 +39,8 @@ abstract class AbstractRepository<T>(private val dynamoDb: DynamoDbEnhancedAsync
         return table.getItem(Key.builder().partitionValue(pk).sortValue(sk).build()).await()
     }
 
-    fun findAllByPk(pk:String): Flow<Page<T>> {
-        return table.query(QueryConditional.keyEqualTo(Key.builder().partitionValue(pk).build())).asFlow()
+    fun findAllByPk(pk:String): Flow<MutableList<T>> {
+        return table.query(QueryConditional.keyEqualTo(Key.builder().partitionValue(pk).build())).asFlow().map { it.items() }
     }
 
     abstract fun createSaveRequest(entity: T): PutItemEnhancedRequest<T>

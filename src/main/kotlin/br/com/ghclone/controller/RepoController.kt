@@ -8,6 +8,7 @@ import br.com.ghclone.service.RepoService
 import io.github.oshai.kotlinlogging.KotlinLogging
 import jakarta.validation.Valid
 import jakarta.validation.constraints.NotBlank
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
 import org.springframework.web.bind.annotation.*
@@ -54,16 +55,10 @@ class RepoController(
     @GetMapping("/{repoName}")
     suspend fun findRepo2(
         @PathVariable("repoName") @NotBlank repoName: String,
-    ): List<RepoSchema> {
+    ): Flow<MutableList<RepoSchema>> {
         val list = mutableListOf<RepoSchema>()
         return repoService.findRepos(
-            name = repoName
-        ).map { it.items() }.toList().flatten().also {
-            logger.info {
-                "getUser: find successfully to " +
-                        "document: $repoName"
-            }
-        }
+            name = repoName)
     }
 //
 //    @PutMapping("/{userId}")
