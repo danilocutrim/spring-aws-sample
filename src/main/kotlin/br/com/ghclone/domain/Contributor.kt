@@ -13,7 +13,7 @@ data class Contributor(
 ) {
     fun toUserSchema(): PermissionSchema {
         return userSchema {
-            userName = user.name
+            userName = user.userName
             login = user.login
             email = user.email
         }
@@ -21,7 +21,7 @@ data class Contributor(
 
     fun toUserPermissionSchema(repo: String): PermissionSchema {
         return userPermission {
-            userName = user.name
+            userName = user.userName
             isAdmin = userIsAdmin
             repoName = repo
         }
@@ -30,7 +30,7 @@ data class Contributor(
 
     fun toRepoPermissionSchema(repo: String): PermissionSchema {
         return repoPermission {
-            userName = user.name
+            userName = user.userName
             isAdmin = userIsAdmin
             repoName = repo
         }

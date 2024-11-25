@@ -7,4 +7,4 @@ data class RepoInfoSchema(
     var repositoryName: String? = null,
     var description: String? = null,
     var repoCreatedAt: String? = null,
-)
+):Schema

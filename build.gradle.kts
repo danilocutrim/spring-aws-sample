@@ -18,6 +18,10 @@ repositories {
 	mavenCentral()
 }
 
+apply(plugin = "kotlin")
+apply(plugin = "java")
+apply(plugin = "org.jetbrains.kotlin.jvm")
+apply(plugin = "kotlin-spring")
 dependencies {
 //	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")

@@ -17,5 +17,5 @@ data class RepoSchema(
     @get:DynamoDbIgnoreNulls
     @get:DynamoDbPreserveEmptyObject
     var repoInfo: RepoInfoSchema? = null
-)
+):Schema
 

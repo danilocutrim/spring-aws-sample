@@ -9,4 +9,4 @@ data class ContentSchema(
     var name: String? = null,
     var path:String? = null,
     var createdAt: String? = null
-)
+):Schema

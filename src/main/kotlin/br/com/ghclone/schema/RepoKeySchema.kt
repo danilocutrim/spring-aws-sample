@@ -10,4 +10,4 @@ data class RepoKeySchema(
     var pk: String? = null,
     @get:DynamoDbSortKey
     var sk: String? = null,
-)
+):Schema
