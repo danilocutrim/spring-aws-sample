@@ -34,9 +34,9 @@ abstract class KeyData(open val partitionKey: KeyDat, val separator: String, var
         sK.joinToString { keyStr(it, separator) }
     }
     val pk by lazy { keyStr(partitionKey, separator) }
-
-
 }
+
+
 
 //data class DynamoKey(override val partitionKey: String, override val pkType: ContentType) :
 //    KeyData(partitionKey, pkType, "#") {

@@ -14,6 +14,7 @@ import software.amazon.awssdk.enhanced.dynamodb.internal.AttributeValues
 import software.amazon.awssdk.enhanced.dynamodb.model.GetItemEnhancedRequest
 import software.amazon.awssdk.enhanced.dynamodb.model.PutItemEnhancedRequest
 import software.amazon.awssdk.enhanced.dynamodb.model.QueryConditional
+import software.amazon.awssdk.enhanced.dynamodb.model.QueryEnhancedRequest
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue
 import software.amazon.awssdk.utils.Validate
 import java.util.*
@@ -46,7 +47,10 @@ abstract class AbstractRepository<T>(private val dynamoDb: DynamoDbEnhancedAsync
     }
 
     fun findAllByPk(pk:String): Flow<MutableList<T>> {
-        return table.query(QueryConditional.keyEqualTo(Key.builder().partitionValue(pk).build())).asFlow().map { it.items() }
+        val gett= QueryEnhancedRequest.builder().limit(10)
+        return table.query(QueryConditional
+            .keyEqualTo(Key.builder().partitionValue(pk)
+            .build())).asFlow().map { it.items() }
     }
 
     abstract fun createSaveRequest(entity: T): PutItemEnhancedRequest<T>
@@ -184,3 +188,20 @@ abstract class AbstractRepository<T>(private val dynamoDb: DynamoDbEnhancedAsync
 //        }
 //    }
 //}
+
+
+@Target(AnnotationTarget.FUNCTION)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class LogExecution
+
+class MyService {
+    @LogExecution
+    fun performAction() {
+        println("Action performed")
+    }
+}
+
+fun main() {
+    val service = MyService()
+    service.performAction()
+}
